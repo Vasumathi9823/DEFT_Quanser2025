@@ -134,9 +134,8 @@ To minimize travel time without compromising safety (i.e., staying within lane b
 - **Heading Error** term: \(\psi(t) - \psi_d(t)\)
 - **Improvisation**: Added \(\frac{d\psi(t)}{dt}\) for extra damping on heading to eliminate oscillation at high speed.
 
-- Youtube video [link](https//tinyurl.com/DEFTQuanser2025)
 
-
+Youtube video [link]([https//tinyurl.com/DEFTQuanser2025])
 
 To showcase object detection and avoidance capabilities, we also added a pedestrian to the simulated environment. The Python setup script for this addition is provided [here](python_dev/pedestrian_move_cone_updated.py).
 
