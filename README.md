@@ -65,21 +65,76 @@ At traffic intersections, the vehicle may detect **multiple traffic lights** (e.
 
 ![QCar Navigation Map](media/sc2.png)
 
-## Control Loop
+## 🚦 Traffic Sign & Light Recognition
 
-For localization, we make use of:
+We implemented and optimized multiple components to meet the competition goals effectively:
 
-- `QCarEKF` — an Extended Kalman Filter
-- `qcarGPS` — simulated GPS data from Quanser’s HAL/PAL libraries
+### 🔍 Detection Model
 
-### Control Strategy
+- **Model Used:** YOLOv11  
+- **Training:** Manually labeled data collected by driving the vehicle in the actual environment.
 
-We implement the **Stanley controller algorithm** to generate steering and speed commands:
+### 🧠 Trained Classes
 
-- **Speed Control**: Tracks a reference speed.
-- **Steering Control**: Uses heading error and a **Stanley gain**.
+- **Traffic Lights:**  
+  - Red  
+  - Green  
+  - Yellow
 
-To improve waypoint tracking accuracy, both the reference speed and Stanley gain are **dynamically adjusted** based on the **orientation of upcoming waypoints** with respect to the vehicle’s heading.
+- **Traffic Signs:**  
+  - Stop  
+  - Yield  
+  - Roundabout  
+  - Pedestrian (person)  
+  - Cone
+
+### 🔄 Dynamic Traffic Light Selection at Intersections
+
+- The vehicle **uses the slope of upcoming waypoints** to identify the relevant traffic light.
+- It **checks the status of the selected light** (red/green) to decide whether to stop or proceed.
+- This logic **generalizes across all routes**, even when the trajectory dynamically changes.
+
+## 🚗 Competition Components Overview
+
+We implemented and optimized multiple components to meet the competition goals effectively:
+
+---
+
+### 🧍 Pedestrian Detection & Response
+
+- **Pedestrian detection** is handled by the same **YOLOv11** model.
+- The vehicle estimates the **distance to a pedestrian** using bounding box dimensions.
+- If a person is detected **at or near a crosswalk**, the vehicle **halts and waits** until the path is clear.
+
+---
+
+### 🕒 Time-Efficient Speed & Control Strategy
+
+To minimize travel time without compromising safety (i.e., staying within lane boundaries):
+
+- The vehicle **adjusts reference speed based on the slope** of upcoming waypoints:
+  - **Straight path (slope ≈ 0):** High speed → `1.25`
+  - **Curved path:** Reduced speed → `0.4` (for better control)
+
+- The **Stanley controller gain** is also **adaptively tuned** based on the slope to ensure **stable and accurate path tracking**.
+
+## EXPERIMENTAL HIGHLIGHTS
+
+**We implemented and optimized multiple components to meet the competition goals effectively:**
+
+### ⚙️ Vehicle Control
+
+![Stanley Controller Diagram](media/sc3.png)
+
+- **Steering Control**: Improvised Stanley Controller  
+- **Speed Control**: PID controller with two different reference velocities
+
+**Diagram Notes:**
+- **Crosstrack Error** term: \(\delta(t) = \arctan\left(\frac{k e(t)}{v(t)}\right)\)
+- **Heading Error** term: \(\psi(t) - \psi_d(t)\)
+- **Improvisation**: Added \(\frac{d\psi(t)}{dt}\) for extra damping on heading to eliminate oscillation at high speed.
+
+
 
 To showcase object detection and avoidance capabilities, we also added a pedestrian to the simulated environment. The Python setup script for this addition is provided [here](python_dev/pedestrian_move_cone_updated.py).
 
