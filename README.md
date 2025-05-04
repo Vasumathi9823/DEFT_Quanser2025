@@ -134,7 +134,7 @@ To minimize travel time without compromising safety (i.e., staying within lane b
 - **Heading Error** term: \(\psi(t) - \psi_d(t)\)
 - **Improvisation**: Added \(\frac{d\psi(t)}{dt}\) for extra damping on heading to eliminate oscillation at high speed.
 
-- Youtube video [link:https](//tinyurl.com/DEFTQuanser2025)
+- Youtube video [link] https//tinyurl.com/DEFTQuanser2025)
 
 
 
