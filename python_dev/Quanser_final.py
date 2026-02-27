@@ -51,7 +51,7 @@ K_stanley = 2
 nodeSequence = [10 , 2 , 4, 14 , 20 , 22 , 9 , 13 , 19 , 17 , 20 , 22 , 10 ] 
 
 
-#----region : Initial setup-----#
+#----region : Initial setup fpr quanser-----#
 
 if enableSteeringControl:
     roadmap = SDCSRoadMap(leftHandTraffic=False)
