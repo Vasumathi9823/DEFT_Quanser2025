@@ -22,7 +22,7 @@ Control Loop:
 we have utilised hal and pal libraries for localization(using QcarEKF and qcarGPS) , we have used staney controller based algorithm for to provide control input to track a reference speed(for speed controller) and stanley gain and heading error (for steering control),To track the way points better we dynamically change the reference tracking speed and the Stanley gain(steering control) according to orientaion of waypoints ahead with respect to the vehicle. -->
 # Quanser Competition 2025 Submission
 
-This repository contains our official submission for the **Quanser Autonomous Vehicle Challenge 2025**.
+This repository contain our official submission for the **Quanser Autonomous Vehicle Challenge 2025**.
 
 ## Scenario Implementation
 
